@@ -1,0 +1,25 @@
+From 7e5334b655c05abb138da742c26df875a0d6ec0c Mon Sep 17 00:00:00 2001
+From: Troy Dawson <tdawson@redhat.com>
+Date: Tue, 27 Feb 2018 11:54:16 -0600
+Subject: [PATCH] Use RPM_OPT_FLAGS on s390x
+
+---
+ src/c/Makefile-linux-s390x-64.make | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/c/Makefile-linux-s390x-64.make b/src/c/Makefile-linux-s390x-64.make
+index 4360f38..08c097f 100644
+--- a/src/c/Makefile-linux-s390x-64.make
++++ b/src/c/Makefile-linux-s390x-64.make
+@@ -23,7 +23,7 @@
+ 
+ # This makefile is inprogess.  It builds, but the resulting libwrapper.so does not yet work.
+ # If you know how to fix it then please help out.
+-COMPILE = gcc -O3 -fPIC -Wall --pedantic
++COMPILE = gcc ${RPM_OPT_FLAGS} -fPIC --pedantic
+ 
+ INCLUDE=$(JAVA_HOME)/include
+ 
+-- 
+2.14.2
+

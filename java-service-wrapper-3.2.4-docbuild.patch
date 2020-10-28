@@ -1,0 +1,57 @@
+Doc build targets brought back from upstream 3.2.3 source tarball.
+
+--- build.xml.orig	2010-09-28 08:10:42.000000000 +0300
++++ build.xml	2011-05-20 00:13:42.133223006 +0300
+@@ -26,6 +26,12 @@
+              possible locations of the tools.jar file. -->
+         <pathelement location="${java.home}/lib/tools.jar"/>
+         <pathelement location="${java.home}/../lib/tools.jar"/>
++        
++        <!-- Cocoon docs.  The directory is set as it is so the build will work when
++             the cocoon files are not available. -->
++        <fileset dir="${basedir}/tools/">
++            <include name="cocoon-${cocoon.dist.version}/lib/*.jar" />
++        </fileset>
+     </path>
+     
+     <path id="test.class.path">
+@@ -732,6 +738,39 @@
+         description="default development build task"/>
+     
+     <!-- =================================================================== -->
++    <!-- Documentation target                                                -->
++    <!-- =================================================================== -->
++    <target name="doc-src-test" depends="init:msg">
++       <available file="${src.dir}/documentation/english.uris" property="doc-src.present"/>
++    </target>
++    <target name="doc" depends="doc-src-test" if="doc-src.present"
++       description="generates the Wrapper documentation">
++        
++        <mkdir dir="${build.dir}"/>
++        <mkdir dir="${build.dir}/work"/>
++        <mkdir dir="${doc.dir}"/>
++        
++        <fixcrlf eol="lf" destdir="${context.dir}/xdocs/english" srcdir="${src.dir}/conf">
++            <include name="wrapper.conf.in"/>
++        </fixcrlf>
++
++        <java classname="org.apache.cocoon.Main" fork="true">
++            <jvmarg value="-Xmx256M"/>
++            <arg value="-c${context.dir}/"/>
++            <arg value="-d${doc.dir}"/>
++            <arg value="-w${build.dir}/work"/>
++            <arg value="-uINFO"/>
++            <arg value="-f${context.dir}/english.uris"/>
++            <classpath>
++                <path refid="tools.class.path"/>
++            </classpath>
++        </java>
++
++        <copy tofile="${doc.dir}/english/index.html" 
++              file="${doc.dir}/english/introduction.html"/>
++    </target>
++    
++    <!-- =================================================================== -->
+     <!-- Release (Common)                                                    -->
+     <!-- =================================================================== -->
+     <target name="release-common" depends="test">
