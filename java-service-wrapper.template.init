@@ -1,0 +1,79 @@
+#!/bin/sh
+#
+# chkconfig:   - 71 29
+# description: TODO
+
+### BEGIN INIT INFO
+# Provides: TODO
+# Required-Start: $local_fs $syslog
+# Required-Stop: $local_fs $syslog
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: TODO
+### END INIT INFO
+
+. /etc/rc.d/init.d/functions
+
+# Remember to symlink $exec to the wrapper executable
+exec=/usr/sbin/TODO
+prog=${exec##*/}
+lockfile=/var/lock/subsys/$prog
+statusfile=/var/run/$prog/wrapper.status
+javastatusfile=/var/run/$prog/java.status
+logfile=/var/log/$prog/wrapper.log
+user=$prog
+
+[ -e /etc/sysconfig/$prog ] && . /etc/sysconfig/$prog
+
+OPTS=/etc/$prog.wrapper.conf
+OPTS="$OPTS wrapper.ntservice.name=$prog wrapper.logfile=$logfile"
+[ -n "$statusfile" ] && OPTS="$OPTS wrapper.statusfile=$statusfile"
+[ -n "$javastatusfile" ] && OPTS="$OPTS wrapper.java.statusfile=$javastatusfile"
+
+start() {
+    max_fd=$(ulimit -H -n 2>/dev/null)
+    [ $? -eq 0 -a -n "$max_fd" ] && ulimit -n "$max_fd"
+    echo -n $"Starting $prog: "
+    daemon --user=$user $exec $OPTS
+    retval=$?
+    echo
+    [ $retval -eq 0 ] && touch $lockfile
+    return $retval
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    killproc $prog
+    retval=$?
+    echo
+    [ $retval -eq 0 ] && rm -f $lockfile
+    return $retval
+}
+
+restart() {
+    stop
+    start
+}
+
+case "$1" in
+    start|stop|restart)
+        $1
+        ;;
+    reload|force-reload)
+        restart
+        ;;
+    status)
+        status $prog
+        echo -n $"Wrapper status: "
+        [ -f "$statusfile" ] && cat "$statusfile" 2>/dev/null || echo UNKNOWN
+        echo -n $"Java status: "
+        [ -f "$javastatusfile" ] && \
+            cat "$javastatusfile" 2>/dev/null || echo UNKNOWN
+        ;;
+    condrestart|try-restart)
+  	[ ! -f $lockfile ] || restart
+	;;
+    *)
+        echo $"Usage: $0 {start|stop|status|restart|try-restart|reload|force-reload}"
+        exit 2
+esac

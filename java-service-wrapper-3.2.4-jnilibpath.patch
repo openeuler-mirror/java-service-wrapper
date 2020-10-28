@@ -1,0 +1,12 @@
+diff -up ivertex-java-service-wrapper-637f7cc19e33/src/java/org/tanukisoftware/wrapper/WrapperManager.java~ ivertex-java-service-wrapper-637f7cc19e33/src/java/org/tanukisoftware/wrapper/WrapperManager.java
+--- ivertex-java-service-wrapper-637f7cc19e33/src/java/org/tanukisoftware/wrapper/WrapperManager.java~	2010-09-28 08:10:42.000000000 +0300
++++ ivertex-java-service-wrapper-637f7cc19e33/src/java/org/tanukisoftware/wrapper/WrapperManager.java	2011-04-07 01:38:27.273480672 +0300
+@@ -924,7 +924,7 @@ public final class WrapperManager
+     {
+         try
+         {
+-            System.loadLibrary( name );
++            System.load( new File( "@LIBPATH@", file ).toString() );
+             
+             if ( m_debug )
+             {
