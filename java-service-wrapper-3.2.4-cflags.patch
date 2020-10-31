@@ -1,0 +1,52 @@
+Index: ivertex-yaja-wrapper-3290d306074a/src/c/Makefile-linux-ppc-64.make
+===================================================================
+--- ivertex-yaja-wrapper-3290d306074a.orig/src/c/Makefile-linux-ppc-64.make
++++ ivertex-yaja-wrapper-3290d306074a/src/c/Makefile-linux-ppc-64.make
+@@ -23,7 +23,7 @@
+ 
+ # This makefile is inprogess.  It builds, but the resulting libwrapper.so does not yet work.
+ # If you know how to fix it then please help out.
+-COMPILE = gcc -O3 -m64 -fPIC --pedantic
++COMPILE = gcc ${RPM_OPT_FLAGS} -fPIC --pedantic
+ 
+ INCLUDE=$(JAVA_HOME)/include
+ 
+Index: ivertex-yaja-wrapper-3290d306074a/src/c/Makefile-linux-x86-32.make
+===================================================================
+--- ivertex-yaja-wrapper-3290d306074a.orig/src/c/Makefile-linux-x86-32.make
++++ ivertex-yaja-wrapper-3290d306074a/src/c/Makefile-linux-x86-32.make
+@@ -21,7 +21,7 @@
+ # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ # OTHER DEALINGS IN THE SOFTWARE.
+ 
+-COMPILE = gcc -O3 -Wall --pedantic
++COMPILE = gcc ${RPM_OPT_FLAGS} -fPIC --pedantic
+ 
+ INCLUDE=$(JAVA_HOME)/include
+ 
+Index: ivertex-yaja-wrapper-3290d306074a/src/c/Makefile-linux-x86-64.make
+===================================================================
+--- ivertex-yaja-wrapper-3290d306074a.orig/src/c/Makefile-linux-x86-64.make
++++ ivertex-yaja-wrapper-3290d306074a/src/c/Makefile-linux-x86-64.make
+@@ -23,7 +23,7 @@
+ 
+ # This makefile is inprogess.  It builds, but the resulting libwrapper.so does not yet work.
+ # If you know how to fix it then please help out.
+-COMPILE = gcc -O3 -fPIC -Wall --pedantic
++COMPILE = gcc ${RPM_OPT_FLAGS} -fPIC --pedantic
+ 
+ INCLUDE=$(JAVA_HOME)/include
+ 
+Index: ivertex-yaja-wrapper-3290d306074a/src/c/Makefile-linux-arm-32.make
+===================================================================
+--- ivertex-yaja-wrapper-3290d306074a.orig/src/c/Makefile-linux-arm-32.make
++++ ivertex-yaja-wrapper-3290d306074a/src/c/Makefile-linux-arm-32.make
+@@ -23,7 +23,7 @@
+ 
+ # This makefile is inprogess.  It builds, but the resulting libwrapper.so does not yet work.
+ # If you know how to fix it then please help out.
+-COMPILE = gcc -O3 -fPIC -Wall --pedantic
++COMPILE = gcc ${RPM_OPT_FLAGS} -fPIC --pedantic
+ 
+ INCLUDE=$(JAVA_HOME)/include
+ 
