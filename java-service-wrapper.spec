@@ -13,7 +13,7 @@
 %global cocoon  cocoon-2.0.4
 Name:                java-service-wrapper
 Version:             3.2.5
-Release:             1
+Release:             2
 Summary:             Java service wrapper
 License:             MIT
 URL:                 https://bitbucket.org/ivertex/yaja-wrapper
@@ -30,6 +30,7 @@ Patch2:              %{name}-3.2.4-docbuild.patch
 Patch3:              %{name}-3.2.5-rhbz1037144.patch
 Patch98:             Use-RPM_OPT_FLAGS-on-s390x.patch
 Patch99:             ppc64le-support.patch
+Patch100:            java-service-wrapper.patch
 BuildRequires:       ant javapackages-local gcc make
 %description
 The Java Service Wrapper enables a Java application to be run as a
@@ -51,6 +52,7 @@ sed -e 's|@LIBPATH@|%{_libdir}/%{name}|' %{PATCH1} | %{__patch} -p1 -F 0
 %patch3
 %patch98 -p1
 %patch99 -p1
+%patch100 -p1
 %if %{with docs}
 mkdir tools ; cd tools
 tar xf %{SOURCE3}
@@ -88,5 +90,8 @@ install -pm 755 lib/libwrapper.so $RPM_BUILD_ROOT%{_libdir}/%{name}
 %license doc/license.txt
 
 %changelog
+* Mon Apr 17 2023 Xiaoya Huang <huangxiaoya@iscas.ac.cn> - 3.2.5-2
+- Fix CC compiler support
+
 * Wed Oct 28 2020 shaoqiang kang <kangshaoqiang1@huawei.com> - 3.2.5-1
 - Package init
