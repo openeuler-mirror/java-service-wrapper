@@ -1,0 +1,25 @@
+--- a/src/c/Makefile-linux-x86-64.make	2011-10-09 03:57:01.000000000 +0800
++++ b/src/c/Makefile-linux-x86-64.make	2023-04-17 15:09:48.080753752 +0800
+@@ -23,7 +23,8 @@
+ 
+ # This makefile is inprogess.  It builds, but the resulting libwrapper.so does not yet work.
+ # If you know how to fix it then please help out.
+-COMPILE = gcc ${RPM_OPT_FLAGS} -fPIC --pedantic
++CC ?=gcc
++COMPILE = $(CC) ${RPM_OPT_FLAGS} -fPIC --pedantic
+ 
+ INCLUDE=$(JAVA_HOME)/include
+ 
+
+--- a/src/c/Makefile-linux-ppc64le-64.make	2014-03-17 16:35:25.920002695 -0500
++++ b/src/c/Makefile-linux-ppc64le-64.make	2023-04-17 15:09:48.080753752 +0800
+@@ -23,7 +23,8 @@
+ 
+ # This makefile is inprogess.  It builds, but the resulting libwrapper.so does not yet work.
+ # If you know how to fix it then please help out.
+-COMPILE = gcc ${RPM_OPT_FLAGS} -fPIC --pedantic
++CC ?=gcc
++COMPILE = $(CC) ${RPM_OPT_FLAGS} -fPIC --pedantic
+ 
+ INCLUDE=$(JAVA_HOME)/include
+ 
