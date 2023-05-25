@@ -30,7 +30,7 @@ Patch2:              %{name}-3.2.4-docbuild.patch
 Patch3:              %{name}-3.2.5-rhbz1037144.patch
 Patch98:             Use-RPM_OPT_FLAGS-on-s390x.patch
 Patch99:             ppc64le-support.patch
-Patch100:            java-service-wrapper.patch
+Patch100:            java-service-wrapper-fix-cc.patch
 BuildRequires:       ant javapackages-local gcc make
 %description
 The Java Service Wrapper enables a Java application to be run as a
